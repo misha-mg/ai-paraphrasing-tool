@@ -61,6 +61,8 @@ export function getProviderConfigs(): ProviderConfig[] {
   });
 }
 
-export const createParaphrasePrompt = (text: string): string => {
-  return `Paraphrase: ${text}`;
+export const createParaphrasePrompt = (text: string, instructions?: string): string => {
+  const base = 'Paraphrase the following text.';
+  const rules = instructions && instructions.trim() ? `\nFollow these formatting instructions precisely: ${instructions.trim()}` : '';
+  return `${base}${rules}\nText: ${text}`;
 };

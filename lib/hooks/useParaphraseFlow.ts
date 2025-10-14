@@ -7,9 +7,10 @@ import { useClipboard } from './useClipboard';
 import { validateParaphraseInput } from '@/lib/utils/validation';
 import { DEFAULT_SAMPLE_TEXT, ERROR_MESSAGES, AVAILABLE_MODELS, MODEL_AUTO_VALUE } from '@/lib/utils/constants';
 
-export function useParaphrase() {
+export function useParaphraseFlow() {
   const [state, setState] = useState<ParaphraseState>(initialParaphraseState);
   const [selectedModel, setSelectedModel] = useState<string>(MODEL_AUTO_VALUE);
+  const [instructions, setInstructions] = useState<string>('');
   const clipboard = useClipboard();
 
   const handleInputChange = (text: string) => {
@@ -19,6 +20,11 @@ export function useParaphrase() {
       status: ParaphraseStatus.IDLE,
       error: null,
     }));
+  };
+
+  const handleInstructionsChange = (text: string) => {
+    setInstructions(text);
+    setState((prev) => ({ ...prev, status: ParaphraseStatus.IDLE, error: null }));
   };
 
   const handlePaste = async () => {
@@ -45,8 +51,8 @@ export function useParaphrase() {
 
     try {
       const payload = selectedModel === MODEL_AUTO_VALUE
-        ? { text: state.inputText }
-        : { text: state.inputText, model: selectedModel };
+        ? { text: state.inputText, instructions: instructions || undefined }
+        : { text: state.inputText, model: selectedModel, instructions: instructions || undefined };
       const result = await paraphraseRequest(payload);
       setState((prev) => ({
         ...prev,
@@ -89,6 +95,8 @@ export function useParaphrase() {
     state,
     selectedModel,
     setSelectedModel,
+    instructions,
+    handleInstructionsChange,
     handleInputChange,
     handlePaste,
     handleSampleText,

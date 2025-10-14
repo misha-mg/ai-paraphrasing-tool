@@ -35,6 +35,7 @@ export async function POST(request: Request) {
     const body = await request.json();
     const text = typeof body?.text === 'string' ? body.text : '';
     const model = typeof body?.model === 'string' ? body.model : undefined;
+    const instructions = typeof body?.instructions === 'string' ? body.instructions : undefined;
 
     const validation = validateParaphraseInput(text);
     if (!validation.isValid) {
@@ -43,7 +44,7 @@ export async function POST(request: Request) {
 
     const cleanText = sanitizeText(text);
     const service = new AIService();
-    const result = await service.paraphrase(cleanText, model);
+    const result = await service.paraphrase(cleanText, model, instructions);
 
     logger.info('paraphrase.success', { provider: result.provider, timestamp: result.timestamp });
     return NextResponse.json({ paraphrasedText: result.text, provider: result.provider, timestamp: result.timestamp });

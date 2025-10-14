@@ -1,6 +1,7 @@
 'use client';
 
 import { TextField, Box, Typography } from '@mui/material';
+import { createTextAreaSx } from './styles';
 import { ReactNode } from 'react';
 import { A11Y_LABELS, INPUT_CONSTRAINTS } from '@/lib/utils/constants';
 import { getCharacterCount } from '@/lib/utils/validation';
@@ -46,38 +47,7 @@ export default function TextInputArea({
           maxLength: INPUT_CONSTRAINTS.MAX_LENGTH,
         }}
         error={isOverLimit}
-        sx={{
-          '& .MuiOutlinedInput-root': {
-            backgroundColor: hasValue ? '#FFFFFF' : '#EEF0F5',
-            borderRadius: { xs: '12px', sm: '16px' },
-            '& fieldset': {
-              borderRadius: { xs: '12px', sm: '16px' },
-            },
-            boxShadow: 'none',
-          },
-          '& .MuiOutlinedInput-input': textColor ? {
-            color: textColor,
-            fontSize: { xs: '14px', sm: '16px' },
-            lineHeight: { xs: 1.4, sm: 1.5 },
-          } : {
-            fontSize: { xs: '14px', sm: '16px' },
-            lineHeight: { xs: 1.4, sm: 1.5 },
-          },
-          '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'rgba(0, 0, 0, 0.23)',
-            borderWidth: '1px',
-          },
-          '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'rgba(0, 0, 0, 0.23)',
-          },
-          '& .MuiOutlinedInput-root.Mui-focused': {
-            boxShadow: 'none',
-          },
-          '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'rgba(0, 0, 0, 0.23)',
-            borderWidth: '1px',
-          },
-        }}
+        sx={createTextAreaSx({ hasValue, textColor })}
       />
       {overlay && (
         <Box

@@ -10,14 +10,14 @@ export class OpenAIProvider extends BaseAIProvider {
     super(config);
   }
 
-  async paraphrase(text: string, modelOverride?: string): Promise<string> {
+  async paraphrase(text: string, modelOverride?: string, instructions?: string): Promise<string> {
     this.ensureConfigured();
 
     const model = modelOverride || getEnvConfig().openaiModel || PROVIDERS_METADATA.openai.defaultModel;
     const body = {
       model,
       messages: [
-        { role: 'user', content: createParaphrasePrompt(text) },
+        { role: 'user', content: createParaphrasePrompt(text, instructions) },
       ],
       temperature: 0.3,
     } as const;
@@ -45,7 +45,7 @@ export class OpenAIProvider extends BaseAIProvider {
         isResponsesModel
           ? {
               model,
-              input: createParaphrasePrompt(text),
+              input: createParaphrasePrompt(text, instructions),
             }
           : body
       ),

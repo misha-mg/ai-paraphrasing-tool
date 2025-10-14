@@ -10,7 +10,7 @@ export abstract class BaseAIProvider implements AIProvider {
     this.timeout = config.timeout;
   }
 
-  abstract paraphrase(text: string): Promise<string>;
+  abstract paraphrase(text: string, model?: string, instructions?: string): Promise<string>;
 
   isAvailable(): boolean {
     return Boolean(this.apiKey);

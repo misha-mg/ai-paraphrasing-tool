@@ -52,6 +52,7 @@ export const A11Y_LABELS = {
   OUTPUT_AREA: 'Paraphrased text result',
   LOADING: 'Processing your text',
   ERROR: 'Error message',
+  INSTRUCTIONS: 'Enter formatting instructions',
 } as const;
 
 

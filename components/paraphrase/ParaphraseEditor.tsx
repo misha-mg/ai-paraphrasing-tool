@@ -1,17 +1,20 @@
 'use client';
 
-import { Box, Button, Typography, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
+import { Box, Button, Typography, FormControl, InputLabel, Select, MenuItem, TextField } from '@mui/material';
+import { createTextAreaSx, overlayButtonSxShared } from './styles';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import TextInputArea from './TextInputArea';
-import { BUTTON_LABELS, AVAILABLE_MODELS, MODEL_AUTO_VALUE } from '@/lib/utils/constants';
+import { BUTTON_LABELS, AVAILABLE_MODELS, MODEL_AUTO_VALUE, A11Y_LABELS } from '@/lib/utils/constants';
 
-interface InitialScreenProps {
+interface ParaphraseEditorProps {
   inputText: string;
   onInputChange: (text: string) => void;
   selectedModel: string;
   onModelChange: (model: string) => void;
+  instructions?: string;
+  onInstructionsChange?: (text: string) => void;
   onPaste: () => void;
   onSampleText: () => void;
   onParaphrase: () => void;
@@ -25,11 +28,13 @@ interface InitialScreenProps {
   onNewText?: () => void;
 }
 
-export default function InitialScreen({
+export default function ParaphraseEditor({
   inputText,
   onInputChange,
   selectedModel,
   onModelChange,
+  instructions,
+  onInstructionsChange,
   onPaste,
   onSampleText,
   onParaphrase,
@@ -41,28 +46,10 @@ export default function InitialScreen({
   errorMessage,
   onCopy,
   onNewText,
-}: InitialScreenProps) {
+}: ParaphraseEditorProps) {
   const hasText = inputText.trim().length > 0;
-  const overlayButtonSx = {
-    minWidth: { xs: '140px', sm: '196px' },
-    height: { xs: '64px', sm: '80px' },
-    px: { xs: '6px', sm: '8px' },
-    py: { xs: '12px', sm: '16px' },
-    borderRadius: { xs: '8px', sm: '11px' },
-    borderWidth: '1px',
-    color: '#76777A',
-    borderColor: '#76777A',
-    backgroundColor: '#FFFFFF',
-    textTransform: 'none',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: { xs: '4px', sm: '8px' },
-    fontSize: { xs: '13px', sm: '14px' },
-    '& .MuiButton-startIcon': { margin: 0 },
-    '& .MuiSvgIcon-root': { color: 'currentColor', fontSize: { xs: '20px', sm: '24px' } },
-  } as const;
+  const hasInstructions = Boolean(instructions && instructions.trim().length > 0);
+  const overlayButtonSx = overlayButtonSxShared;
 
   return (
     <Box sx={{ position: 'relative', overflow: 'hidden' }}>
@@ -148,6 +135,19 @@ export default function InitialScreen({
           ) : undefined
         }
       />
+      <Box sx={{ mt: { xs: 2, sm: 3 } }}>
+        <TextField
+          fullWidth
+          multiline
+          minRows={3}
+          label="Formatting rules (optional)"
+          placeholder="E.g., Use bullet points, keep sentences under 20 words, preserve citations..."
+          value={instructions || ''}
+          onChange={(e) => onInstructionsChange?.(e.target.value)}
+          inputProps={{ 'aria-label': A11Y_LABELS.INSTRUCTIONS }}
+          sx={createTextAreaSx({ hasValue: hasInstructions })}
+        />
+      </Box>
       {isError && errorMessage && (
         <Typography sx={{ mt: { xs: '8px', sm: '12px' }, px: { xs: '12px', sm: '16px' }, color: '#FF3B30', fontSize: { xs: '12px', sm: '14px' } }}>
           {errorMessage}
