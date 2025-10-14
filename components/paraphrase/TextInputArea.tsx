@@ -1,7 +1,7 @@
 'use client';
 
 import { TextField, Box, Typography } from '@mui/material';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { A11Y_LABELS, INPUT_CONSTRAINTS } from '@/lib/utils/constants';
 import { getCharacterCount } from '@/lib/utils/validation';
 
@@ -29,6 +29,26 @@ export default function TextInputArea({
   const charCount = getCharacterCount(value);
   const isOverLimit = charCount > INPUT_CONSTRAINTS.MAX_LENGTH;
   const hasValue = value.trim().length > 0;
+  const bottomOverlayRef = useRef<HTMLDivElement | null>(null);
+  const [bottomOverlayHeight, setBottomOverlayHeight] = useState<number>(0);
+
+  // Measure bottom overlay height to add adequate padding so text isn't obscured
+  useLayoutEffect(() => {
+    if (!bottomOverlayRef.current) {
+      setBottomOverlayHeight(0);
+      return;
+    }
+    setBottomOverlayHeight(bottomOverlayRef.current.offsetHeight || 0);
+  }, [bottomOverlay, hasValue]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (!bottomOverlayRef.current) return;
+      setBottomOverlayHeight(bottomOverlayRef.current.offsetHeight || 0);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <Box sx={{ position: 'relative' }}>
@@ -59,9 +79,11 @@ export default function TextInputArea({
             color: textColor,
             fontSize: { xs: '0.875rem', sm: '1rem' },
             lineHeight: { xs: 1.4, sm: 1.5 },
+            paddingBottom: bottomOverlay ? `${Math.max(bottomOverlayHeight, 0) + 8}px` : undefined,
           } : {
             fontSize: { xs: '0.875rem', sm: '1rem' },
             lineHeight: { xs: 1.4, sm: 1.5 },
+            paddingBottom: bottomOverlay ? `${Math.max(bottomOverlayHeight, 0) + 8}px` : undefined,
           },
           '& .MuiOutlinedInput-notchedOutline': {
             borderColor: 'rgba(0, 0, 0, 0.23)',
@@ -99,6 +121,7 @@ export default function TextInputArea({
       )}
       {bottomOverlay && (
         <Box
+          ref={bottomOverlayRef}
           sx={{
             position: 'absolute',
             left: 1,
