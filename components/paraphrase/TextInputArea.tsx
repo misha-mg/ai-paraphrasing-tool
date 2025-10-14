@@ -80,10 +80,50 @@ export default function TextInputArea({
             fontSize: { xs: '0.875rem', sm: '1rem' },
             lineHeight: { xs: 1.4, sm: 1.5 },
             paddingBottom: bottomOverlay ? `${Math.max(bottomOverlayHeight, 0) + 8}px` : undefined,
+            paddingRight: '12px',
+            scrollbarWidth: 'thin',
+            scrollbarColor: 'rgba(59, 90, 174, 0.5) transparent',
+            '&::-webkit-scrollbar': {
+              width: '4px',
+              height: '4px',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              backgroundColor: 'rgba(59, 90, 174, 0.5)',
+              borderRadius: '4px',
+            },
+            '&::-webkit-scrollbar-thumb:hover': {
+              backgroundColor: 'rgba(59, 90, 174, 0.8)',
+            },
+            '&::-webkit-scrollbar-track': {
+              background: 'transparent',
+            },
+            '&::-webkit-scrollbar-corner': {
+              background: 'transparent',
+            },
           } : {
             fontSize: { xs: '0.875rem', sm: '1rem' },
             lineHeight: { xs: 1.4, sm: 1.5 },
             paddingBottom: bottomOverlay ? `${Math.max(bottomOverlayHeight, 0) + 8}px` : undefined,
+            paddingRight: '12px',
+            scrollbarWidth: 'thin',
+            scrollbarColor: 'rgba(59, 90, 174, 0.5) transparent',
+            '&::-webkit-scrollbar': {
+              width: '4px',
+              height: '4px',
+            },
+            '&::-webkit-scrollbar-thumb': {
+              backgroundColor: 'rgba(59, 90, 174, 0.5)',
+              borderRadius: '4px',
+            },
+            '&::-webkit-scrollbar-thumb:hover': {
+              backgroundColor: 'rgba(59, 90, 174, 0.8)',
+            },
+            '&::-webkit-scrollbar-track': {
+              background: 'transparent',
+            },
+            '&::-webkit-scrollbar-corner': {
+              background: 'transparent',
+            },
           },
           '& .MuiOutlinedInput-notchedOutline': {
             borderColor: 'rgba(0, 0, 0, 0.23)',
