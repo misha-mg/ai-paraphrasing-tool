@@ -69,7 +69,7 @@ LOG_LEVEL=info
 ```
 
 ### How It Works
-- **UI** (`components/paraphrase/*`): The `useParaphrase` hook posts input to the API and handles loading/error/success.
+- **UI** (`components/paraphrase/*`): The `useParaphraseFlow` hook posts input to the API and handles loading/error/success.
 - **API** (`app/api/paraphrase/route.ts`): Validates input, sanitizes text, calls the AI service, returns paraphrase.
 - **AI service** (`lib/ai/ai-service.ts`): Calls all configured providers in parallel and returns the first successful result.
 - **Providers** (`lib/ai/providers/*`): Thin wrappers for OpenAI and Gemini HTTP APIs with per‑call timeouts.

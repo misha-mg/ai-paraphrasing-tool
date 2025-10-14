@@ -7,7 +7,7 @@ import { useClipboard } from './useClipboard';
 import { validateParaphraseInput } from '@/lib/utils/validation';
 import { DEFAULT_SAMPLE_TEXT, ERROR_MESSAGES } from '@/lib/utils/constants';
 
-export function useParaphrase() {
+export function useParaphraseFlow() {
   const [state, setState] = useState<ParaphraseState>(initialParaphraseState);
   const clipboard = useClipboard();
 
@@ -94,4 +94,5 @@ export function useParaphrase() {
     isParaphraseDisabled,
   };
 }
+
 

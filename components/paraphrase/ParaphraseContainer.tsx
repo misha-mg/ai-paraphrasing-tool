@@ -1,11 +1,11 @@
 'use client';
 
 import { Container, Box, Typography } from '@mui/material';
-import { useParaphrase } from '@/lib/hooks/useParaphrase';
+import { useParaphraseFlow } from '@/lib/hooks/useParaphraseFlow';
 import { ParaphraseStatus } from '@/types/paraphrase.types';
 import dynamic from 'next/dynamic';
 
-const InitialScreen = dynamic(() => import('./InitialScreen'));
+const ParaphraseEditor = dynamic(() => import('./ParaphraseEditor'));
 
 export default function ParaphraseContainer() {
   const {
@@ -19,7 +19,7 @@ export default function ParaphraseContainer() {
     handleCopy,
     handleNewText,
     isParaphraseDisabled,
-  } = useParaphrase();
+  } = useParaphraseFlow();
 
   const renderScreen = () => {
     switch (state.status) {
@@ -28,7 +28,7 @@ export default function ParaphraseContainer() {
       case ParaphraseStatus.SUCCESS:
       case ParaphraseStatus.ERROR:
         return (
-          <InitialScreen
+          <ParaphraseEditor
             inputText={state.status === ParaphraseStatus.SUCCESS ? state.outputText : state.inputText}
             onInputChange={handleInputChange}
             onPaste={handlePaste}

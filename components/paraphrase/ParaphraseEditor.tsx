@@ -7,7 +7,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import TextInputArea from './TextInputArea';
 import { BUTTON_LABELS } from '@/lib/utils/constants';
 
-interface InitialScreenProps {
+interface ParaphraseEditorProps {
   inputText: string;
   onInputChange: (text: string) => void;
   onPaste: () => void;
@@ -23,7 +23,7 @@ interface InitialScreenProps {
   onNewText?: () => void;
 }
 
-export default function InitialScreen({
+export default function ParaphraseEditor({
   inputText,
   onInputChange,
   onPaste,
@@ -37,7 +37,7 @@ export default function InitialScreen({
   errorMessage,
   onCopy,
   onNewText,
-}: InitialScreenProps) {
+}: ParaphraseEditorProps) {
   const hasText = inputText.trim().length > 0;
   const overlayButtonSx = {
     minWidth: { xs: '8.75rem', sm: '12.25rem' },
@@ -137,4 +137,5 @@ export default function InitialScreen({
     </Box>
   );
 }
+
 
