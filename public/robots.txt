@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: ${NEXT_PUBLIC_APP_URL}/sitemap.xml
+
+
