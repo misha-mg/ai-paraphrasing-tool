@@ -11,11 +11,8 @@ interface TextInputAreaProps {
   placeholder?: string;
   disabled?: boolean;
   label?: string;
-  // Optional overlay content to render absolutely on top of the text field
   overlay?: ReactNode;
-  // Optional bottom overlay bar that sticks to the bottom of the input area
   bottomOverlay?: ReactNode;
-  // Optional text color override
   textColor?: string;
 }
 
@@ -56,7 +53,6 @@ export default function TextInputArea({
             '& fieldset': {
               borderRadius: { xs: '12px', sm: '16px' },
             },
-            // Remove active/focus visual changes
             boxShadow: 'none',
           },
           '& .MuiOutlinedInput-input': textColor ? {

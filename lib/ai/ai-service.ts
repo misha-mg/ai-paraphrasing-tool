@@ -16,11 +16,6 @@ export class AIService {
       throw new Error('No AI providers configured');
     }
 
-    // Hedged requests strategy:
-    // 1) Start the highest-priority provider.
-    // 2) If it exceeds the global timeout, start the rest in parallel without aborting the first.
-    // 3) Return the first successful result from any provider.
-
     const [primary, ...rest] = this.providers;
     const startedAtByProvider: Record<string, number> = {};
 
@@ -51,7 +46,7 @@ export class AIService {
     ]);
 
     if (outcome === 'primary_ok') {
-      const winner = await primaryPromise; // already resolved
+      const winner = await primaryPromise;
       return {
         text: winner.text,
         provider: winner.provider,
@@ -60,7 +55,6 @@ export class AIService {
       };
     }
 
-    // Fan out to the remaining providers. If we timed out, keep primary in the race; if it failed early, exclude it.
     const restPromises = rest.map((p) => callWrapped(p));
     const racePool = outcome === 'timeout' ? [primaryPromise, ...restPromises] : restPromises;
 

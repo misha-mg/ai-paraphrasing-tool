@@ -56,7 +56,6 @@ export class OpenAIProvider extends BaseAIProvider {
       }
       const data = await res.json();
 
-      // Responses API shortcuts
       if (typeof data?.output_text === 'string' && data.output_text.trim()) {
         return String(data.output_text).trim();
       }
@@ -75,7 +74,6 @@ export class OpenAIProvider extends BaseAIProvider {
         if (parts.length) return parts.join('\n').trim();
       }
 
-      // Chat Completions fallback
       const content = data?.choices?.[0]?.message?.content;
       if (!content || typeof content !== 'string') {
         throw new Error('Invalid OpenAI response');

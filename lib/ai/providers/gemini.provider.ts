@@ -42,7 +42,6 @@ export class GeminiProvider extends BaseAIProvider {
         throw new Error(`Gemini ${res.status}: ${errText}`);
       }
       const data = await res.json();
-      // Attempt to extract text from candidates → content → parts[] → text
       const parts = data?.candidates?.[0]?.content?.parts;
       let content = '';
       if (Array.isArray(parts)) {
@@ -53,7 +52,6 @@ export class GeminiProvider extends BaseAIProvider {
           .trim();
       }
       if (!content) {
-        // Fallbacks for alternative response shapes
         content =
           data?.candidates?.[0]?.content?.text ||
           data?.candidates?.[0]?.output_text ||
