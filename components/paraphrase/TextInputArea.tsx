@@ -2,7 +2,7 @@
 
 import { TextField, Box, Typography } from '@mui/material';
 import { createTextAreaSx } from './styles';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useMemo, useRef, useState } from 'react';
 import { A11Y_LABELS, INPUT_CONSTRAINTS } from '@/lib/utils/constants';
 import { getCharacterCount } from '@/lib/utils/validation';
 
@@ -30,9 +30,26 @@ export default function TextInputArea({
   const charCount = getCharacterCount(value);
   const isOverLimit = charCount > INPUT_CONSTRAINTS.MAX_LENGTH;
   const hasValue = value.trim().length > 0;
+  const bottomOverlayRef = useRef<HTMLDivElement | null>(null);
+  const [overlayHeight, setOverlayHeight] = useState<number>(0);
+
+  useEffect(() => {
+    const el = bottomOverlayRef.current;
+    if (!bottomOverlay || !el) {
+      setOverlayHeight(0);
+      return;
+    }
+    const update = () => setOverlayHeight(el.offsetHeight || 0);
+    update();
+    const ro = new ResizeObserver(() => update());
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [bottomOverlay]);
+
+  const textAreaSx = useMemo(() => createTextAreaSx({ hasValue, textColor }), [hasValue, textColor]);
 
   return (
-    <Box sx={{ position: 'relative' }}>
+    <Box sx={{ position: 'relative', pb: bottomOverlay ? { xs: `${overlayHeight + 8}px`, sm: `${overlayHeight + 8}px` } : 0 }}>
       <TextField
         fullWidth
         multiline
@@ -47,7 +64,7 @@ export default function TextInputArea({
           maxLength: INPUT_CONSTRAINTS.MAX_LENGTH,
         }}
         error={isOverLimit}
-        sx={createTextAreaSx({ hasValue, textColor })}
+        sx={textAreaSx}
       />
       {overlay && (
         <Box
@@ -69,6 +86,7 @@ export default function TextInputArea({
       )}
       {bottomOverlay && (
         <Box
+          ref={bottomOverlayRef}
           sx={{
             position: 'absolute',
             left: 1,
@@ -77,7 +95,7 @@ export default function TextInputArea({
             zIndex: 2,
             backgroundColor: '#FFFFFF',
             display: 'flex',
-            justifyContent: 'flex-end',
+            justifyContent: { xs: 'stretch', sm: 'flex-end' },
             p: { xs: 0.75, sm: 1 },
             pointerEvents: 'none',
             borderBottomLeftRadius: { xs: '12px', sm: '16px' },
@@ -85,7 +103,7 @@ export default function TextInputArea({
             borderTop: hasValue ? '1px solid rgba(0, 0, 0, 0.23)' : 'none',
           }}
         >
-          <Box sx={{ display: 'flex', gap: { xs: '6px', sm: '8px' }, alignItems: 'center', pointerEvents: 'auto' }}>
+          <Box sx={{ display: 'flex', gap: { xs: '8px', sm: '8px' }, alignItems: { xs: 'stretch', sm: 'center' }, pointerEvents: 'auto', flexDirection: { xs: 'column', sm: 'row' }, width: { xs: '100%', sm: 'auto' } }}>
             {bottomOverlay}
           </Box>
         </Box>

@@ -84,7 +84,7 @@ export default function ParaphraseEditor({
         bottomOverlay={
           !isSuccess ? (
             <>
-              <FormControl size="small" color="secondary" sx={{ minWidth: 200 }}>
+              <FormControl size="small" color="secondary" fullWidth sx={{ minWidth: { sm: 200 }, width: { xs: '100%', sm: 'auto' } }}>
                 <InputLabel id="model-select-label">Model</InputLabel>
                 <Select
                   labelId="model-select-label"
@@ -105,10 +105,11 @@ export default function ParaphraseEditor({
                   color="secondary"
                   startIcon={<CloseIcon />}
                   onClick={onClear}
+                  fullWidth
                   sx={{
                     borderRadius: '9999px',
                     px: { xs: 2, sm: 3 },
-                    width: 'fit-content',
+                    width: { xs: '100%', sm: 'fit-content' },
                     background: '#EEF0F5',
                     color: '#254699',
                     fontSize: { xs: '13px', sm: '14px' },
@@ -122,10 +123,11 @@ export default function ParaphraseEditor({
                 variant="contained"
                 onClick={onParaphrase}
                 disabled={isParaphraseDisabled || isLoading}
+                fullWidth
                 sx={{
                   borderRadius: '9999px',
                   px: { xs: 2, sm: 3 },
-                  width: 'fit-content',
+                  width: { xs: '100%', sm: 'fit-content' },
                   fontSize: { xs: '13px', sm: '14px' },
                 }}
               >

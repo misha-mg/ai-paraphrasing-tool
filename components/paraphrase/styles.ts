@@ -2,6 +2,7 @@ export const createTextAreaSx = (
   options: {
     hasValue?: boolean;
     textColor?: string;
+    reservedBottomSpace?: number;
   } = {}
 ) => {
   const { hasValue = false, textColor } = options;
