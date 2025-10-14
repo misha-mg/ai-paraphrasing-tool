@@ -15,13 +15,6 @@ export function validateParaphraseInput(text: string): ValidationResult {
 
   const trimmedText = text.trim();
 
-  if (trimmedText.length < INPUT_CONSTRAINTS.MIN_LENGTH) {
-    return {
-      isValid: false,
-      error: INPUT_CONSTRAINTS.MIN_LENGTH_MESSAGE,
-    };
-  }
-
   if (trimmedText.length > INPUT_CONSTRAINTS.MAX_LENGTH) {
     return {
       isValid: false,
@@ -57,7 +50,6 @@ export function getWordCount(text: string): number {
 export function isValidLength(text: string): boolean {
   const length = text.trim().length;
   return (
-    length >= INPUT_CONSTRAINTS.MIN_LENGTH &&
     length <= INPUT_CONSTRAINTS.MAX_LENGTH
   );
 }

@@ -1,7 +1,5 @@
 export const INPUT_CONSTRAINTS = {
-  MIN_LENGTH: 10,
   MAX_LENGTH: 5000,
-  MIN_LENGTH_MESSAGE: 'Text must be at least 10 characters long',
   MAX_LENGTH_MESSAGE: 'Text must not exceed 5000 characters',
   REQUIRED_MESSAGE: 'Enter text here or upload file to humanize it.',
 } as const;

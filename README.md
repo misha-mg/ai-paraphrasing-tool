@@ -43,28 +43,6 @@ npm run dev
 - `npm run typecheck`: run TypeScript type checker (no emit)
 - `npm run check`: run typecheck then lint
 
-### Linting and Type Checking
-Keep code quality high by running linters and type checks locally.
-
-Run ESLint:
-```bash
-npm run lint
-```
-
-Auto-fix lint issues where possible:
-```bash
-npm run lint:fix
-```
-
-Type-check the project (no output files are emitted):
-```bash
-npm run typecheck
-```
-
-Run both typecheck and lint in one go:
-```bash
-npm run check
-```
 
 ### Environment Variables (common)
 Copy from `env.example` and adjust as needed:
