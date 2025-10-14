@@ -1,15 +1,17 @@
 'use client';
 
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Typography, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import TextInputArea from './TextInputArea';
-import { BUTTON_LABELS } from '@/lib/utils/constants';
+import { BUTTON_LABELS, AVAILABLE_MODELS, MODEL_AUTO_VALUE } from '@/lib/utils/constants';
 
 interface InitialScreenProps {
   inputText: string;
   onInputChange: (text: string) => void;
+  selectedModel: string;
+  onModelChange: (model: string) => void;
   onPaste: () => void;
   onSampleText: () => void;
   onParaphrase: () => void;
@@ -26,6 +28,8 @@ interface InitialScreenProps {
 export default function InitialScreen({
   inputText,
   onInputChange,
+  selectedModel,
+  onModelChange,
   onPaste,
   onSampleText,
   onParaphrase,
@@ -93,6 +97,21 @@ export default function InitialScreen({
         bottomOverlay={
           !isSuccess ? (
             <>
+              <FormControl size="small" color="secondary" sx={{ minWidth: 200 }}>
+                <InputLabel id="model-select-label">Model</InputLabel>
+                <Select
+                  labelId="model-select-label"
+                  id="model-select"
+                  value={selectedModel}
+                  label="Model"
+                  onChange={(e) => onModelChange(String(e.target.value))}
+                >
+                  <MenuItem value={MODEL_AUTO_VALUE}>Fastest (auto)</MenuItem>
+                  {AVAILABLE_MODELS.map((m) => (
+                    <MenuItem key={m} value={m}>{m}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
              {hasText && !isLoading && (
                 <Button
                   variant="contained"

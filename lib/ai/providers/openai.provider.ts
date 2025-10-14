@@ -10,10 +10,10 @@ export class OpenAIProvider extends BaseAIProvider {
     super(config);
   }
 
-  async paraphrase(text: string): Promise<string> {
+  async paraphrase(text: string, modelOverride?: string): Promise<string> {
     this.ensureConfigured();
 
-    const model = getEnvConfig().openaiModel || PROVIDERS_METADATA.openai.defaultModel;
+    const model = modelOverride || getEnvConfig().openaiModel || PROVIDERS_METADATA.openai.defaultModel;
     const body = {
       model,
       messages: [

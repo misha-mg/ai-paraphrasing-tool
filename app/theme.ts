@@ -129,6 +129,54 @@ export const theme = createTheme({
         },
       ],
     },
+    MuiOutlinedInput: {
+      variants: [
+        {
+          props: { size: 'small', color: 'secondary' },
+          style: {
+            borderRadius: '9999px',
+            backgroundColor: '#EEF0F5',
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#254699',
+              borderWidth: '1px',
+            },
+            '&:hover .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#254699',
+            },
+            '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+              borderColor: '#254699',
+              borderWidth: '1px',
+            },
+            '& .MuiSelect-select': {
+              padding: '10px 16px',
+            },
+          },
+        },
+      ],
+    },
+    MuiSelect: {
+      styleOverrides: {
+        icon: {
+          color: '#254699',
+        },
+        select: {
+          paddingRight: '40px',
+          display: 'flex',
+          alignItems: 'center',
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          borderRadius: 8,
+        },
+        selected: {
+          backgroundColor: '#EEF0F5 !important',
+          color: '#254699',
+        },
+      },
+    },
     MuiCard: {
       styleOverrides: {
         root: {

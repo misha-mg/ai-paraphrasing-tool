@@ -10,10 +10,10 @@ export class GeminiProvider extends BaseAIProvider {
     super(config);
   }
 
-  async paraphrase(text: string): Promise<string> {
+  async paraphrase(text: string, modelOverride?: string): Promise<string> {
     this.ensureConfigured();
 
-    const model = getEnvConfig().geminiModel || PROVIDERS_METADATA.gemini.defaultModel;
+    const model = modelOverride || getEnvConfig().geminiModel || PROVIDERS_METADATA.gemini.defaultModel;
 
     const body = {
       contents: [

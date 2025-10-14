@@ -10,6 +10,8 @@ const InitialScreen = dynamic(() => import('./InitialScreen'));
 export default function ParaphraseContainer() {
   const {
     state,
+    selectedModel,
+    setSelectedModel,
     handleInputChange,
     handlePaste,
     handleSampleText,
@@ -31,6 +33,8 @@ export default function ParaphraseContainer() {
           <InitialScreen
             inputText={state.status === ParaphraseStatus.SUCCESS ? state.outputText : state.inputText}
             onInputChange={handleInputChange}
+            selectedModel={selectedModel}
+            onModelChange={setSelectedModel}
             onPaste={handlePaste}
             onSampleText={handleSampleText}
             onParaphrase={handleParaphrase}

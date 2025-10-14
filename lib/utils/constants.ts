@@ -54,3 +54,12 @@ export const A11Y_LABELS = {
   ERROR: 'Error message',
 } as const;
 
+
+// Available model ids (flat list across providers; used for UI select)
+export const AVAILABLE_MODELS = [
+  'gpt-5',
+  'gemini-2.5-flash',
+] as const;
+
+export const MODEL_AUTO_VALUE = 'auto';
+

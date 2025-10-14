@@ -1,5 +1,6 @@
 export interface ParaphraseRequest {
   text: string;
+  model?: string;
 }
 
 export interface ParaphraseResponse {

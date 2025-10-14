@@ -5,10 +5,11 @@ import { ParaphraseStatus, initialParaphraseState, ParaphraseState } from '@/typ
 import { paraphraseRequest } from '@/lib/api/paraphrase';
 import { useClipboard } from './useClipboard';
 import { validateParaphraseInput } from '@/lib/utils/validation';
-import { DEFAULT_SAMPLE_TEXT, ERROR_MESSAGES } from '@/lib/utils/constants';
+import { DEFAULT_SAMPLE_TEXT, ERROR_MESSAGES, AVAILABLE_MODELS, MODEL_AUTO_VALUE } from '@/lib/utils/constants';
 
 export function useParaphrase() {
   const [state, setState] = useState<ParaphraseState>(initialParaphraseState);
+  const [selectedModel, setSelectedModel] = useState<string>(MODEL_AUTO_VALUE);
   const clipboard = useClipboard();
 
   const handleInputChange = (text: string) => {
@@ -43,7 +44,10 @@ export function useParaphrase() {
     setState((prev) => ({ ...prev, status: ParaphraseStatus.LOADING, error: null }));
 
     try {
-      const result = await paraphraseRequest({ text: state.inputText });
+      const payload = selectedModel === MODEL_AUTO_VALUE
+        ? { text: state.inputText }
+        : { text: state.inputText, model: selectedModel };
+      const result = await paraphraseRequest(payload);
       setState((prev) => ({
         ...prev,
         status: ParaphraseStatus.SUCCESS,
@@ -83,6 +87,8 @@ export function useParaphrase() {
 
   return {
     state,
+    selectedModel,
+    setSelectedModel,
     handleInputChange,
     handlePaste,
     handleSampleText,
