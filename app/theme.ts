@@ -35,8 +35,8 @@ export const theme = createTheme({
         root: {
           textTransform: 'none',
           borderRadius: '9999px',
-          padding: '12px 16px',
-          fontSize: '14px',
+          padding: '0.75rem 1rem',
+          fontSize: '0.875rem',
           boxShadow: 'none',
         },
       },

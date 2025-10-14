@@ -40,11 +40,11 @@ export default function InitialScreen({
 }: InitialScreenProps) {
   const hasText = inputText.trim().length > 0;
   const overlayButtonSx = {
-    minWidth: { xs: '140px', sm: '196px' },
-    height: { xs: '64px', sm: '80px' },
-    px: { xs: '6px', sm: '8px' },
-    py: { xs: '12px', sm: '16px' },
-    borderRadius: { xs: '8px', sm: '11px' },
+    minWidth: { xs: '8.75rem', sm: '12.25rem' },
+    height: { xs: '4rem', sm: '5rem' },
+    px: { xs: '0.375rem', sm: '0.5rem' },
+    py: { xs: '0.75rem', sm: '1rem' },
+    borderRadius: { xs: '0.5rem', sm: '0.6875rem' },
     borderWidth: '1px',
     color: '#76777A',
     borderColor: '#76777A',
@@ -54,10 +54,10 @@ export default function InitialScreen({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: { xs: '4px', sm: '8px' },
-    fontSize: { xs: '13px', sm: '14px' },
+    gap: { xs: '0.25rem', sm: '0.5rem' },
+    fontSize: { xs: '0.8125rem', sm: '0.875rem' },
     '& .MuiButton-startIcon': { margin: 0 },
-    '& .MuiSvgIcon-root': { color: 'currentColor', fontSize: { xs: '20px', sm: '24px' } },
+    '& .MuiSvgIcon-root': { color: 'currentColor', fontSize: { xs: '1.25rem', sm: '1.5rem' } },
   } as const;
 
   return (
@@ -99,15 +99,15 @@ export default function InitialScreen({
                   color="secondary"
                   startIcon={<CloseIcon />}
                   onClick={onClear}
-                  sx={{
-                    borderRadius: '9999px',
-                    px: { xs: 2, sm: 3 },
-                    width: 'fit-content',
-                    background: '#EEF0F5',
-                    color: '#254699',
-                    fontSize: { xs: '13px', sm: '14px' },
-                    '& .MuiSvgIcon-root': { fontSize: { xs: '18px', sm: '20px' } }
-                  }}
+                sx={{
+                  borderRadius: '9999px',
+                  px: { xs: 2, sm: 3 },
+                  width: 'fit-content',
+                  background: '#EEF0F5',
+                  color: '#254699',
+                  fontSize: { xs: '0.8125rem', sm: '0.875rem' },
+                  '& .MuiSvgIcon-root': { fontSize: { xs: '1.125rem', sm: '1.25rem' } }
+                }}
                 >
                   {BUTTON_LABELS.CLEAR}
                 </Button>
@@ -120,7 +120,7 @@ export default function InitialScreen({
                   borderRadius: '9999px',
                   px: { xs: 2, sm: 3 },
                   width: 'fit-content',
-                  fontSize: { xs: '13px', sm: '14px' },
+                  fontSize: { xs: '0.8125rem', sm: '0.875rem' },
                 }}
               >
                 {isLoading ? 'Paraphrasing' : BUTTON_LABELS.PARAPHRASE}
@@ -130,7 +130,7 @@ export default function InitialScreen({
         }
       />
       {isError && errorMessage && (
-        <Typography sx={{ mt: { xs: '8px', sm: '12px' }, px: { xs: '12px', sm: '16px' }, color: '#FF3B30', fontSize: { xs: '12px', sm: '14px' } }}>
+        <Typography sx={{ mt: { xs: '0.5rem', sm: '0.75rem' }, px: { xs: '0.75rem', sm: '1rem' }, color: '#FF3B30', fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
           {errorMessage}
         </Typography>
       )}

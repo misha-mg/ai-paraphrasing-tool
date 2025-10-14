@@ -49,18 +49,18 @@ export default function TextInputArea({
         sx={{
           '& .MuiOutlinedInput-root': {
             backgroundColor: hasValue ? '#FFFFFF' : '#EEF0F5',
-            borderRadius: { xs: '12px', sm: '16px' },
+            borderRadius: { xs: '0.75rem', sm: '1rem' },
             '& fieldset': {
-              borderRadius: { xs: '12px', sm: '16px' },
+              borderRadius: { xs: '0.75rem', sm: '1rem' },
             },
             boxShadow: 'none',
           },
           '& .MuiOutlinedInput-input': textColor ? {
             color: textColor,
-            fontSize: { xs: '14px', sm: '16px' },
+            fontSize: { xs: '0.875rem', sm: '1rem' },
             lineHeight: { xs: 1.4, sm: 1.5 },
           } : {
-            fontSize: { xs: '14px', sm: '16px' },
+            fontSize: { xs: '0.875rem', sm: '1rem' },
             lineHeight: { xs: 1.4, sm: 1.5 },
           },
           '& .MuiOutlinedInput-notchedOutline': {
@@ -110,12 +110,12 @@ export default function TextInputArea({
             justifyContent: 'flex-end',
             p: { xs: 0.75, sm: 1 },
             pointerEvents: 'none',
-            borderBottomLeftRadius: { xs: '12px', sm: '16px' },
-            borderBottomRightRadius: { xs: '12px', sm: '16px' },
+            borderBottomLeftRadius: { xs: '0.75rem', sm: '1rem' },
+            borderBottomRightRadius: { xs: '0.75rem', sm: '1rem' },
             borderTop: hasValue ? '1px solid rgba(0, 0, 0, 0.23)' : 'none',
           }}
         >
-          <Box sx={{ display: 'flex', gap: { xs: '6px', sm: '8px' }, alignItems: 'center', pointerEvents: 'auto' }}>
+          <Box sx={{ display: 'flex', gap: { xs: '0.375rem', sm: '0.5rem' }, alignItems: 'center', pointerEvents: 'auto' }}>
             {bottomOverlay}
           </Box>
         </Box>
