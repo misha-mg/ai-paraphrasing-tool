@@ -8,7 +8,7 @@ export const createTextAreaSx = (
   const { hasValue = false, textColor } = options;
   return {
     '& .MuiOutlinedInput-root': {
-      backgroundColor: hasValue ? '#FFFFFF' : '#EEF0F5',
+      backgroundColor: hasValue ? '#FFFFFF' : '#f5f5f5',
       borderRadius: { xs: '12px', sm: '16px' },
       '& fieldset': {
         borderRadius: { xs: '12px', sm: '16px' },
@@ -26,17 +26,17 @@ export const createTextAreaSx = (
           lineHeight: { xs: 1.4, sm: 1.5 },
         },
     '& .MuiOutlinedInput-notchedOutline': {
-      borderColor: 'rgba(0, 0, 0, 0.23)',
+      borderColor: '#A68F97',
       borderWidth: '1px',
     },
     '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
-      borderColor: 'rgba(0, 0, 0, 0.23)',
+      borderColor: '#A68F97',
     },
     '& .MuiOutlinedInput-root.Mui-focused': {
       boxShadow: 'none',
     },
     '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-      borderColor: 'rgba(0, 0, 0, 0.23)',
+      borderColor: '#A68F97',
       borderWidth: '1px',
     },
   } as const;
@@ -49,8 +49,8 @@ export const overlayButtonSxShared = {
   py: { xs: '12px', sm: '16px' },
   borderRadius: { xs: '8px', sm: '11px' },
   borderWidth: '1px',
-  color: '#76777A',
-  borderColor: '#76777A',
+  color: '#79717A',
+  borderColor: '#79717A',
   backgroundColor: '#FFFFFF',
   textTransform: 'none',
   display: 'flex',

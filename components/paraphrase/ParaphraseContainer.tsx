@@ -66,18 +66,10 @@ export default function ParaphraseContainer() {
           gutterBottom
           textAlign="center"
           fontWeight="bold"
-          sx={{ fontSize: { xs: '28px', sm: '36px', md: '44px' }, mb: { xs: 1, sm: 2 } }}
+          sx={{ fontSize: { xs: '28px', sm: '36px', md: '44px' }, mb: { xs: 1, sm: 2 }, color: '#1F2024' }}
         >
-          AI Text Paraphraser by JustDone
+          AI Text Paraphraser
         </Typography>
-        <Typography
-          variant="h6"
-          textAlign="center"
-          sx={{ mb: { xs: 3, sm: 4, md: 6 }, fontSize: { xs: '16px', sm: '18px', md: '22px' } }}
-        >
-          Transform your writing from good to great with our Paraphraser tool.
-        </Typography>
-
         {renderScreen()}
       </Box>
     </Container>

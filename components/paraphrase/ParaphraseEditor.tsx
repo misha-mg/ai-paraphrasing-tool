@@ -110,8 +110,8 @@ export default function ParaphraseEditor({
                     borderRadius: '9999px',
                     px: { xs: 2, sm: 3 },
                     width: { xs: '100%', sm: 'fit-content' },
-                    background: '#EEF0F5',
-                    color: '#254699',
+                    background: '#A68F97',
+                    color: '#1F2024',
                     fontSize: { xs: '13px', sm: '14px' },
                     '& .MuiSvgIcon-root': { fontSize: { xs: '18px', sm: '20px' } }
                   }}
@@ -151,7 +151,7 @@ export default function ParaphraseEditor({
         />
       </Box>
       {isError && errorMessage && (
-        <Typography sx={{ mt: { xs: '8px', sm: '12px' }, px: { xs: '12px', sm: '16px' }, color: '#FF3B30', fontSize: { xs: '12px', sm: '14px' } }}>
+        <Typography sx={{ mt: { xs: '8px', sm: '12px' }, px: { xs: '12px', sm: '16px' }, color: '#A68F97', fontSize: { xs: '12px', sm: '14px' } }}>
           {errorMessage}
         </Typography>
       )}

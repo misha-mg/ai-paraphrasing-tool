@@ -4,15 +4,19 @@ export const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#3B5AAE',
+      main: '#004F4D',
       contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#254699',
+      main: '#A68F97',
     },
     background: {
       default: '#ffffff',
       paper: '#f5f5f5',
+    },
+    text: {
+      primary: '#1F2024',
+      secondary: '#79717A',
     },
   },
   typography: {
@@ -44,18 +48,18 @@ export const theme = createTheme({
         {
           props: { variant: 'contained', color: 'primary' },
           style: {
-            backgroundColor: '#3B5AAE',
+            backgroundColor: '#004F4D',
             color: '#FFFFFF',
             boxShadow: 'none',
-            border: 'solid 1px #3B5AAE',
+            border: 'solid 1px #004F4D',
             '&:hover': {
               backgroundColor: '#FFFFFF',
-              color: '#3B5AAE',
+              color: '#004F4D',
               boxShadow: 'none',
-              border: 'solid 1px #3B5AAE',
+              border: 'solid 1px #004F4D',
             },
             '&:disabled': {
-              border: 'solid 1px #AEAFB1',
+              border: 'solid 1px #79717A',
             },
           },
         },
@@ -63,7 +67,7 @@ export const theme = createTheme({
           props: { variant: 'contained', color: 'primary', disabled: true },
           style: {
             '&.Mui-disabled': {
-              backgroundColor: '#AEAFB1',
+              backgroundColor: '#79717A',
               color: '#FFFFFF',
             },
           },
@@ -71,12 +75,12 @@ export const theme = createTheme({
         {
           props: { variant: 'contained', color: 'secondary' },
           style: {
-            backgroundColor: '#EEF0F5',
-            color: '#254699',
+            backgroundColor: '#A68F97',
+            color: '#1F2024',
             boxShadow: 'none',
             '&:hover': {
-              backgroundColor: '#254699',
-              color: '#EEF0F5',
+              backgroundColor: '#004F4D',
+              color: '#FFFFFF',
               boxShadow: 'none',
             },
           },
@@ -84,35 +88,35 @@ export const theme = createTheme({
         {
           props: { variant: 'outlined', color: 'primary' },
           style: {
-            color: '#3B5AAE',
-            borderColor: '#3B5AAE',
+            color: '#004F4D',
+            borderColor: '#004F4D',
             backgroundColor: 'transparent',
             '&:hover': {
-              backgroundColor: '#3B5AAE',
+              backgroundColor: '#004F4D',
               color: '#FFFFFF',
-              borderColor: '#3B5AAE',
+              borderColor: '#004F4D',
             },
           },
         },
         {
           props: { variant: 'outlined', color: 'secondary' },
           style: {
-            color: '#254699',
-            borderColor: '#254699',
+            color: '#A68F97',
+            borderColor: '#A68F97',
             backgroundColor: 'transparent',
             '&:hover': {
-              backgroundColor: '#254699',
-              color: '#EEF0F5',
-              borderColor: '#254699',
+              backgroundColor: '#A68F97',
+              color: '#1F2024',
+              borderColor: '#A68F97',
             },
           },
         },
         {
           props: { variant: 'text', color: 'primary' },
           style: {
-            color: '#3B5AAE',
+            color: '#004F4D',
             '&:hover': {
-              backgroundColor: '#3B5AAE',
+              backgroundColor: '#004F4D',
               color: '#FFFFFF',
             },
           },
@@ -120,10 +124,10 @@ export const theme = createTheme({
         {
           props: { variant: 'text', color: 'secondary' },
           style: {
-            color: '#254699',
+            color: '#A68F97',
             '&:hover': {
-              backgroundColor: '#254699',
-              color: '#EEF0F5',
+              backgroundColor: '#A68F97',
+              color: '#1F2024',
             },
           },
         },
@@ -137,14 +141,14 @@ export const theme = createTheme({
             borderRadius: '9999px',
             backgroundColor: '#EEF0F5',
             '& .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#254699',
+              borderColor: '#A68F97',
               borderWidth: '1px',
             },
             '&:hover .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#254699',
+              borderColor: '#A68F97',
             },
             '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-              borderColor: '#254699',
+              borderColor: '#A68F97',
               borderWidth: '1px',
             },
             '& .MuiSelect-select': {
@@ -157,7 +161,7 @@ export const theme = createTheme({
     MuiSelect: {
       styleOverrides: {
         icon: {
-          color: '#254699',
+          color: '#A68F97',
         },
         select: {
           paddingRight: '40px',
@@ -172,8 +176,8 @@ export const theme = createTheme({
           borderRadius: 8,
         },
         selected: {
-          backgroundColor: '#EEF0F5 !important',
-          color: '#254699',
+          backgroundColor: '#A68F97 !important',
+          color: '#1F2024',
         },
       },
     },
