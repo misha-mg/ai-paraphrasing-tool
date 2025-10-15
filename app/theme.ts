@@ -174,10 +174,10 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 8,
-        },
-        selected: {
-          backgroundColor: '#A68F97 !important',
-          color: '#1F2024',
+          '&.Mui-selected': {
+            backgroundColor: '#A68F97 !important',
+            color: '#1F2024',
+          },
         },
       },
     },
