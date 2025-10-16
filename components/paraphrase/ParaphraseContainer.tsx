@@ -21,33 +21,23 @@ export default function ParaphraseContainer() {
     isParaphraseDisabled,
   } = useParaphraseFlow();
 
-  const renderScreen = () => {
-    switch (state.status) {
-      case ParaphraseStatus.IDLE:
-      case ParaphraseStatus.LOADING:
-      case ParaphraseStatus.SUCCESS:
-      case ParaphraseStatus.ERROR:
-        return (
-          <ParaphraseEditor
-            inputText={state.status === ParaphraseStatus.SUCCESS ? state.outputText : state.inputText}
-            onInputChange={handleInputChange}
-            onPaste={handlePaste}
-            onSampleText={handleSampleText}
-            onParaphrase={handleParaphrase}
-            onClear={handleClear}
-            isParaphraseDisabled={isParaphraseDisabled}
-            isLoading={state.status === ParaphraseStatus.LOADING}
-            isSuccess={state.status === ParaphraseStatus.SUCCESS}
-            isError={state.status === ParaphraseStatus.ERROR}
-            errorMessage={state.error || undefined}
-            onCopy={handleCopy}
-            onNewText={handleNewText}
-          />
-        );
-      default:
-        return null;
-    }
-  };
+  const renderScreen = () => (
+    <ParaphraseEditor
+      inputText={state.status === ParaphraseStatus.SUCCESS ? state.outputText : state.inputText}
+      onInputChange={handleInputChange}
+      onPaste={handlePaste}
+      onSampleText={handleSampleText}
+      onParaphrase={handleParaphrase}
+      onClear={handleClear}
+      isParaphraseDisabled={isParaphraseDisabled}
+      isLoading={state.status === ParaphraseStatus.LOADING}
+      isSuccess={state.status === ParaphraseStatus.SUCCESS}
+      isError={state.status === ParaphraseStatus.ERROR}
+      errorMessage={state.error || undefined}
+      onCopy={handleCopy}
+      onNewText={handleNewText}
+    />
+  );
 
   return (
     <Container maxWidth={false} sx={{ maxWidth: '90rem', margin: '0 auto', px: { xs: 2, sm: 3 } }}>
