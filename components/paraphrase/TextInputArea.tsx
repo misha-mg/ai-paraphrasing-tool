@@ -1,6 +1,7 @@
 'use client';
 
 import { TextField, Box, Typography } from '@mui/material';
+import { textInputWrapperSx, getTextFieldSx, overlayContainerSx, overlayInnerSx, getBottomOverlayContainerSx, bottomOverlayInnerSx } from './styles';
 import { ReactNode, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { A11Y_LABELS, INPUT_CONSTRAINTS } from '@/lib/utils/constants';
 import { getCharacterCount } from '@/lib/utils/validation';
@@ -51,7 +52,7 @@ export default function TextInputArea({
   }, []);
 
   return (
-    <Box sx={{ position: 'relative' }}>
+    <Box sx={textInputWrapperSx}>
       <TextField
         fullWidth
         multiline
@@ -66,95 +67,16 @@ export default function TextInputArea({
           maxLength: INPUT_CONSTRAINTS.MAX_LENGTH,
         }}
         error={isOverLimit}
-        sx={{
-          '& .MuiOutlinedInput-root': {
-            backgroundColor: hasValue ? '#FFFFFF' : '#EEF0F5',
-            borderRadius: { xs: '0.75rem', sm: '1rem' },
-            '& fieldset': {
-              borderRadius: { xs: '0.75rem', sm: '1rem' },
-            },
-            boxShadow: 'none',
-          },
-          '& .MuiOutlinedInput-input': textColor ? {
-            color: textColor,
-            fontSize: { xs: '0.875rem', sm: '1rem' },
-            lineHeight: { xs: 1.4, sm: 1.5 },
-            paddingBottom: bottomOverlay ? `${Math.max(bottomOverlayHeight, 0) + 8}px` : undefined,
-            paddingRight: '12px',
-            scrollbarWidth: 'thin',
-            scrollbarColor: 'rgba(59, 90, 174, 0.5) transparent',
-            '&::-webkit-scrollbar': {
-              width: '4px',
-              height: '4px',
-            },
-            '&::-webkit-scrollbar-thumb': {
-              backgroundColor: 'rgba(59, 90, 174, 0.5)',
-              borderRadius: '4px',
-            },
-            '&::-webkit-scrollbar-thumb:hover': {
-              backgroundColor: 'rgba(59, 90, 174, 0.8)',
-            },
-            '&::-webkit-scrollbar-track': {
-              background: 'transparent',
-            },
-            '&::-webkit-scrollbar-corner': {
-              background: 'transparent',
-            },
-          } : {
-            fontSize: { xs: '0.875rem', sm: '1rem' },
-            lineHeight: { xs: 1.4, sm: 1.5 },
-            paddingBottom: bottomOverlay ? `${Math.max(bottomOverlayHeight, 0) + 8}px` : undefined,
-            paddingRight: '12px',
-            scrollbarWidth: 'thin',
-            scrollbarColor: 'rgba(59, 90, 174, 0.5) transparent',
-            '&::-webkit-scrollbar': {
-              width: '4px',
-              height: '4px',
-            },
-            '&::-webkit-scrollbar-thumb': {
-              backgroundColor: 'rgba(59, 90, 174, 0.5)',
-              borderRadius: '4px',
-            },
-            '&::-webkit-scrollbar-thumb:hover': {
-              backgroundColor: 'rgba(59, 90, 174, 0.8)',
-            },
-            '&::-webkit-scrollbar-track': {
-              background: 'transparent',
-            },
-            '&::-webkit-scrollbar-corner': {
-              background: 'transparent',
-            },
-          },
-          '& .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'rgba(0, 0, 0, 0.23)',
-            borderWidth: '1px',
-          },
-          '& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'rgba(0, 0, 0, 0.23)',
-          },
-          '& .MuiOutlinedInput-root.Mui-focused': {
-            boxShadow: 'none',
-          },
-          '& .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline': {
-            borderColor: 'rgba(0, 0, 0, 0.23)',
-            borderWidth: '1px',
-          },
-        }}
+        sx={getTextFieldSx({
+          hasValue,
+          hasBottomOverlay: Boolean(bottomOverlay),
+          bottomOverlayHeight,
+          textColor,
+        })}
       />
       {overlay && (
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            zIndex: 2,
-            display: 'flex',
-            justifyContent: 'center',
-            pointerEvents: 'none',
-          }}
-        >
-          <Box sx={{ display: 'flex', gap: { xs: 0.75, sm: 1 }, pointerEvents: 'auto', flexDirection: { xs: 'column', sm: 'row' }, alignItems: 'center' }}>
+        <Box sx={overlayContainerSx}>
+          <Box sx={overlayInnerSx}>
             {overlay}
           </Box>
         </Box>
@@ -162,23 +84,9 @@ export default function TextInputArea({
       {bottomOverlay && (
         <Box
           ref={bottomOverlayRef}
-          sx={{
-            position: 'absolute',
-            left: 1,
-            right: 1,
-            bottom: 1,
-            zIndex: 2,
-            backgroundColor: '#FFFFFF',
-            display: 'flex',
-            justifyContent: 'flex-end',
-            p: { xs: 0.75, sm: 1 },
-            pointerEvents: 'none',
-            borderBottomLeftRadius: { xs: '0.75rem', sm: '1rem' },
-            borderBottomRightRadius: { xs: '0.75rem', sm: '1rem' },
-            borderTop: hasValue ? '1px solid rgba(0, 0, 0, 0.23)' : 'none',
-          }}
+          sx={getBottomOverlayContainerSx(hasValue)}
         >
-          <Box sx={{ display: 'flex', gap: { xs: '0.375rem', sm: '0.5rem' }, alignItems: 'center', pointerEvents: 'auto' }}>
+          <Box sx={bottomOverlayInnerSx}>
             {bottomOverlay}
           </Box>
         </Box>

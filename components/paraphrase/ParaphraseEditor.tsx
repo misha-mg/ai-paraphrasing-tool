@@ -6,6 +6,7 @@ import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import TextInputArea from './TextInputArea';
 import { BUTTON_LABELS } from '@/lib/utils/constants';
+import { editorOverlayButtonSx, editorRootBoxSx, editorClearButtonSx, editorParaphraseButtonSx, errorTextSx } from './styles';
 
 interface ParaphraseEditorProps {
   inputText: string;
@@ -19,8 +20,6 @@ interface ParaphraseEditorProps {
   isSuccess?: boolean;
   isError?: boolean;
   errorMessage?: string;
-  onCopy?: () => void;
-  onNewText?: () => void;
 }
 
 export default function ParaphraseEditor({
@@ -35,33 +34,10 @@ export default function ParaphraseEditor({
   isSuccess = false,
   isError = false,
   errorMessage,
-  onCopy,
-  onNewText,
 }: ParaphraseEditorProps) {
   const hasText = inputText.trim().length > 0;
-  const overlayButtonSx = {
-    minWidth: { xs: '8.75rem', sm: '12.25rem' },
-    height: { xs: '4rem', sm: '5rem' },
-    px: { xs: '0.375rem', sm: '0.5rem' },
-    py: { xs: '0.75rem', sm: '1rem' },
-    borderRadius: { xs: '0.5rem', sm: '0.6875rem' },
-    borderWidth: '1px',
-    color: '#76777A',
-    borderColor: '#76777A',
-    backgroundColor: '#FFFFFF',
-    textTransform: 'none',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: { xs: '0.25rem', sm: '0.5rem' },
-    fontSize: { xs: '0.8125rem', sm: '0.875rem' },
-    '& .MuiButton-startIcon': { margin: 0 },
-    '& .MuiSvgIcon-root': { color: 'currentColor', fontSize: { xs: '1.25rem', sm: '1.5rem' } },
-  } as const;
-
   return (
-    <Box sx={{ position: 'relative', overflow: 'hidden' }}>
+    <Box sx={editorRootBoxSx}>
       <TextInputArea
         value={inputText}
         onChange={onInputChange}
@@ -75,7 +51,7 @@ export default function ParaphraseEditor({
                 variant="outlined"
                 startIcon={<ContentPasteIcon />}
                 onClick={onPaste}
-                sx={overlayButtonSx}
+                sx={editorOverlayButtonSx}
               >
                 {BUTTON_LABELS.PASTE}
               </Button>
@@ -83,7 +59,7 @@ export default function ParaphraseEditor({
                 variant="outlined"
                 startIcon={<DescriptionOutlinedIcon />}
                 onClick={onSampleText}
-                sx={overlayButtonSx}
+                sx={editorOverlayButtonSx}
               >
                 {BUTTON_LABELS.SAMPLE}
               </Button>
@@ -99,15 +75,7 @@ export default function ParaphraseEditor({
                   color="secondary"
                   startIcon={<CloseIcon />}
                   onClick={onClear}
-                sx={{
-                  borderRadius: '9999px',
-                  px: { xs: 2, sm: 3 },
-                  width: 'fit-content',
-                  background: '#EEF0F5',
-                  color: '#254699',
-                  fontSize: { xs: '0.8125rem', sm: '0.875rem' },
-                  '& .MuiSvgIcon-root': { fontSize: { xs: '1.125rem', sm: '1.25rem' } }
-                }}
+                sx={editorClearButtonSx}
                 >
                   {BUTTON_LABELS.CLEAR}
                 </Button>
@@ -116,12 +84,7 @@ export default function ParaphraseEditor({
                 variant="contained"
                 onClick={onParaphrase}
                 disabled={isParaphraseDisabled || isLoading}
-                sx={{
-                  borderRadius: '9999px',
-                  px: { xs: 2, sm: 3 },
-                  width: 'fit-content',
-                  fontSize: { xs: '0.8125rem', sm: '0.875rem' },
-                }}
+                sx={editorParaphraseButtonSx}
               >
                 {isLoading ? 'Paraphrasing' : BUTTON_LABELS.PARAPHRASE}
               </Button>
@@ -130,7 +93,7 @@ export default function ParaphraseEditor({
         }
       />
       {isError && errorMessage && (
-        <Typography sx={{ mt: { xs: '0.5rem', sm: '0.75rem' }, px: { xs: '0.75rem', sm: '1rem' }, color: '#FF3B30', fontSize: { xs: '0.75rem', sm: '0.875rem' } }}>
+        <Typography sx={errorTextSx}>
           {errorMessage}
         </Typography>
       )}
