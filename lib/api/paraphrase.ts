@@ -17,5 +17,3 @@ export async function paraphraseRequest(payload: ParaphraseRequest): Promise<Par
   const data = (await res.json()) as ParaphraseResponse;
   return data;
 }
-
-

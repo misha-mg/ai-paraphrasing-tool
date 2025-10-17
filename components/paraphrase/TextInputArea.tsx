@@ -11,7 +11,6 @@ interface TextInputAreaProps {
   onChange: (value: string) => void;
   placeholder?: string;
   disabled?: boolean;
-  label?: string;
   overlay?: ReactNode;
   bottomOverlay?: ReactNode;
   textColor?: string;
@@ -22,7 +21,6 @@ export default function TextInputArea({
   onChange,
   placeholder = 'Enter your text here...',
   disabled = false,
-  label,
   overlay,
   bottomOverlay,
   textColor,
@@ -33,7 +31,6 @@ export default function TextInputArea({
   const bottomOverlayRef = useRef<HTMLDivElement | null>(null);
   const [bottomOverlayHeight, setBottomOverlayHeight] = useState<number>(0);
 
-  // Measure bottom overlay height to add adequate padding so text isn't obscured
   useLayoutEffect(() => {
     if (!bottomOverlayRef.current) {
       setBottomOverlayHeight(0);

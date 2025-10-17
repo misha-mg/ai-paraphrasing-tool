@@ -41,7 +41,6 @@ export default function ParaphraseEditor({
       <TextInputArea
         value={inputText}
         onChange={onInputChange}
-        label="Enter your text to paraphrase"
         disabled={isLoading}
         textColor={isSuccess ? '#000000' : undefined}
         overlay={

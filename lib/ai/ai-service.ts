@@ -21,16 +21,17 @@ export class AIService {
 
     const callWrapped = async (provider: AIProvider) => {
       startedAtByProvider[provider.name] = Date.now();
+      let result: Awaited<ReturnType<typeof this.callProvider>>;
       try {
-        const result = await this.callProvider(provider, text);
-        const elapsed = Date.now() - startedAtByProvider[provider.name];
-        logger.info('provider.success', { provider: provider.name, ms: elapsed });
-        return result;
+        result = await this.callProvider(provider, text);
       } catch (error: any) {
         const elapsed = Date.now() - startedAtByProvider[provider.name];
         logger.warn('provider.failed', { provider: provider.name, ms: elapsed, error: String(error?.message || error) });
         throw error;
       }
+      const elapsed = Date.now() - startedAtByProvider[provider.name];
+      logger.info('provider.success', { provider: provider.name, ms: elapsed });
+      return result;
     };
 
     const timeoutMs = getEnvConfig().aiTimeoutMs;
