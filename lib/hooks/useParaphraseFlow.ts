@@ -42,30 +42,29 @@ export function useParaphraseFlow() {
 
     setState((prev) => ({ ...prev, status: ParaphraseStatus.LOADING, error: null }));
 
+    let result: Awaited<ReturnType<typeof paraphraseRequest>> | null = null;
     try {
-      const result = await paraphraseRequest({ text: state.inputText });
-      setState((prev) => ({
-        ...prev,
-        status: ParaphraseStatus.SUCCESS,
-        outputText: result.paraphrasedText,
-        usedProvider: result.provider,
-        error: null,
-      }));
+      result = await paraphraseRequest({ text: state.inputText });
     } catch (e: any) {
       setState((prev) => ({
         ...prev,
         status: ParaphraseStatus.ERROR,
-        error: e.message || ERROR_MESSAGES.GENERIC,
+        error: e?.message || ERROR_MESSAGES.GENERIC,
       }));
+      return;
     }
+
+    setState((prev) => ({
+      ...prev,
+      status: ParaphraseStatus.SUCCESS,
+      outputText: result.paraphrasedText,
+      usedProvider: result.provider,
+      error: null,
+    }));
   };
 
   const handleClear = () => {
     setState(initialParaphraseState);
-  };
-
-  const handleRetry = async () => {
-    await handleParaphrase();
   };
 
   const handleCopy = async () => {
@@ -88,7 +87,6 @@ export function useParaphraseFlow() {
     handleSampleText,
     handleParaphrase,
     handleClear,
-    handleRetry,
     handleCopy,
     handleNewText,
     isParaphraseDisabled,
