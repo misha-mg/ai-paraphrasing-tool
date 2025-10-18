@@ -11,6 +11,8 @@ const ParaphraseEditor = dynamic(() => import('./ParaphraseEditor'));
 export default function ParaphraseContainer() {
   const {
     state,
+    rules,
+    setRules,
     handleInputChange,
     handlePaste,
     handleSampleText,
@@ -52,6 +54,8 @@ export default function ParaphraseContainer() {
           isSuccess={state.status === ParaphraseStatus.SUCCESS}
           isError={state.status === ParaphraseStatus.ERROR}
           errorMessage={state.error || undefined}
+          rules={rules}
+          onRulesChange={setRules}
         />
       </Box>
     </Container>

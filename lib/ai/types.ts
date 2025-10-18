@@ -1,6 +1,6 @@
 export interface AIProvider {
   name: string;
-  paraphrase(text: string): Promise<string>;
+  paraphrase(text: string, rules?: string): Promise<string>;
   isAvailable(): boolean;
 }
 

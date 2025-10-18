@@ -1,5 +1,6 @@
 export interface ParaphraseRequest {
   text: string;
+  rules?: string;
 }
 
 export interface ParaphraseResponse {

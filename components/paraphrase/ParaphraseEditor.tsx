@@ -1,12 +1,15 @@
 'use client';
 
-import { Box, Button, Typography } from '@mui/material';
+import React from 'react';
+import { Box, Button, Typography, Chip, Stack } from '@mui/material';
 import ContentPasteIcon from '@mui/icons-material/ContentPaste';
 import DescriptionOutlinedIcon from '@mui/icons-material/DescriptionOutlined';
 import CloseIcon from '@mui/icons-material/Close';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import TextInputArea from './TextInputArea';
 import { BUTTON_LABELS } from '@/lib/utils/constants';
-import { editorOverlayButtonSx, editorRootBoxSx, editorClearButtonSx, editorParaphraseButtonSx, errorTextSx } from './styles';
+import { editorOverlayButtonSx, editorRootBoxSx, editorClearButtonSx, editorParaphraseButtonSx, errorTextSx, settingsBadgeContainerSx, settingsButtonSx } from './styles';
+import CustomRulesDialog from './CustomRulesDialog';
 
 interface ParaphraseEditorProps {
   inputText: string;
@@ -20,6 +23,8 @@ interface ParaphraseEditorProps {
   isSuccess?: boolean;
   isError?: boolean;
   errorMessage?: string;
+  rules?: string;
+  onRulesChange?: (value: string) => void;
 }
 
 export default function ParaphraseEditor({
@@ -34,10 +39,39 @@ export default function ParaphraseEditor({
   isSuccess = false,
   isError = false,
   errorMessage,
+  rules,
+  onRulesChange,
 }: ParaphraseEditorProps) {
   const hasText = inputText.trim().length > 0;
+  const [isSettingsOpen, setIsSettingsOpen] = React.useState(false);
+  const [rulesText, setRulesText] = React.useState(rules || '');
+  React.useEffect(() => {
+    setRulesText(rules || '');
+  }, [rules]);
+  const hasRules = rulesText.trim().length > 0;
+
+  const openSettings = () => setIsSettingsOpen(true);
+  const closeSettings = () => setIsSettingsOpen(false);
+  const handleSaveRules = () => {
+    if (onRulesChange) onRulesChange(rulesText);
+    setIsSettingsOpen(false);
+  };
   return (
     <Box sx={editorRootBoxSx}>
+      <Box sx={settingsBadgeContainerSx}>
+        <Button
+          variant="outlined"
+          size="small"
+          startIcon={<SettingsOutlinedIcon />}
+          onClick={openSettings}
+          sx={settingsButtonSx}
+        >
+          Settings
+          {hasRules && (
+            <Chip size="small" color="primary" label="1" sx={{ ml: 1, height: 18 }} />
+          )}
+        </Button>
+      </Box>
       <TextInputArea
         value={inputText}
         onChange={onInputChange}
@@ -96,6 +130,13 @@ export default function ParaphraseEditor({
           {errorMessage}
         </Typography>
       )}
+      <CustomRulesDialog
+        open={isSettingsOpen}
+        value={rulesText}
+        onChange={setRulesText}
+        onClose={closeSettings}
+        onSave={handleSaveRules}
+      />
     </Box>
   );
 }
