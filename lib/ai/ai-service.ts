@@ -11,7 +11,7 @@ export class AIService {
     this.providers = ProviderFactory.createProviders();
   }
 
-  async paraphrase(text: string): Promise<ParaphraseResult> {
+  async paraphrase(text: string, rules?: string): Promise<ParaphraseResult> {
     if (this.providers.length === 0) {
       throw new Error('No AI providers configured');
     }
@@ -23,7 +23,7 @@ export class AIService {
       startedAtByProvider[provider.name] = Date.now();
       let result: Awaited<ReturnType<typeof this.callProvider>>;
       try {
-        result = await this.callProvider(provider, text);
+        result = await this.callProvider(provider, text, rules);
       } catch (error: any) {
         const elapsed = Date.now() - startedAtByProvider[provider.name];
         logger.warn('provider.failed', { provider: provider.name, ms: elapsed, error: String(error?.message || error) });
@@ -69,8 +69,8 @@ export class AIService {
     };
   }
 
-  private async callProvider(provider: AIProvider, text: string) {
-    const content = await provider.paraphrase(text);
+  private async callProvider(provider: AIProvider, text: string, rules?: string) {
+    const content = await provider.paraphrase(text, rules);
     return { text: content, provider: provider.name };
   }
 }

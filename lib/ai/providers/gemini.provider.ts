@@ -10,7 +10,7 @@ export class GeminiProvider extends BaseAIProvider {
     super(config);
   }
 
-  async paraphrase(text: string): Promise<string> {
+  async paraphrase(text: string, rules?: string): Promise<string> {
     this.ensureConfigured();
 
     const model = getEnvConfig().geminiModel || PROVIDERS_METADATA.gemini.defaultModel;
@@ -21,7 +21,7 @@ export class GeminiProvider extends BaseAIProvider {
           role: 'user',
           parts: [
             {
-              text: createParaphrasePrompt(text),
+              text: createParaphrasePrompt(text, rules),
             },
           ],
         },

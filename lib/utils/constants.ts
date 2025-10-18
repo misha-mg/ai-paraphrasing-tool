@@ -20,6 +20,10 @@ export const API_ENDPOINTS = {
   PARAPHRASE: '/api/paraphrase',
 } as const;
 
+export const STORAGE_KEYS = {
+  CUSTOM_RULES_V1: 'custom_rules_v1',
+} as const;
+
 export const ERROR_MESSAGES = {
   GENERIC: 'An unexpected error occurred. Please try again.',
   NO_PROVIDERS: 'No AI providers are currently available. Please check your configuration.',

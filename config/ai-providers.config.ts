@@ -61,6 +61,10 @@ export function getProviderConfigs(): ProviderConfig[] {
   });
 }
 
-export const createParaphrasePrompt = (text: string): string => {
+export const createParaphrasePrompt = (text: string, rules?: string): string => {
+  const trimmedRules = (rules || '').trim();
+  if (trimmedRules) {
+    return `You must follow these custom rules strictly:\n---RULES START---\n${trimmedRules}\n---RULES END---\n\nParaphrase the following text while adhering to the rules:\n${text}`;
+  }
   return `Paraphrase: ${text}`;
 };

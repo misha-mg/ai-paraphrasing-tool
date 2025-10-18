@@ -180,3 +180,18 @@ export const bottomOverlayInnerSx: SxProps<Theme> = {
 };
 
 
+// Settings badge (Custom Rules) styles
+export const settingsBadgeContainerSx: SxProps<Theme> = {
+  display: 'flex',
+  justifyContent: 'flex-end',
+  mb: { xs: 0.5, sm: 1 },
+};
+
+export const settingsButtonSx: SxProps<Theme> = {
+  textTransform: 'none',
+  fontSize: { xs: '0.75rem', sm: '0.875rem' },
+  borderRadius: '9999px',
+  px: { xs: 1, sm: 1.5 },
+  py: 0.5,
+};
+
